@@ -1,0 +1,66 @@
+\documentclass[a4paper,14pt]{article}
+
+\usepackage{cmap}           						  % Поиск в PDF
+\usepackage{mathtext}                            % Использование в формулах русского языка
+\usepackage[T2A]{fontenc}                     % Кодировка
+\usepackage[utf8]{inputenc}                   % Кодировка исходного текста
+\usepackage[english,russian]{babel}     % Локализация и переносы
+\usepackage{indentfirst}                          % Отступы для первого абзаца
+
+%%% Работа с рисунками
+\usepackage{graphics}
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{emdash}{\space\textemdash\space}
+\captionsetup{labelsep=emdash}
+\captionsetup{font=it}
+\graphicspath{ {./pic/after} }
+
+\usepackage{lipsum}
+\usepackage{titlesec}
+\titlespacing*{\section}{\parindent}{1ex}{1em}
+\titlespacing*{\subsection}{\parindent}{1ex}{1em}
+
+\setlength{\parindent}{4pc}
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} %AMS
+\usepackage{icomma} % Умная запятая: $0,2 -- запятая; $0, 2 -- перечисление
+
+%%%Шрифты
+\usepackage{euscript}			% Евклид
+\usepackage{mathrsfs}			% Красивый матшрифт
+
+%%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+\author{Иван Крамойкин}
+\title{Калибровка электромагнитного калориметра эксперимента NA64}
+
+%%% Запрет деления слов (перенос слова на новую строку)
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+
+
+\begin{document}
+
+%%% Меняем "Рис._" на "Рисунок_"
+\def\figurename{Рисунок}
+
+\maketitle
+
+\newpage
+
+\input{intro}
+
+\input{chap1.tex}
+
+\input{chap2.tex}
+ 
+\end{document}  

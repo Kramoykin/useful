@@ -1,0 +1,199 @@
+% !TEX program = xelatex
+%----------------------- Преамбула -----------------------
+\documentclass[utf8x, 14pt, oneside, a4paper]{article}
+
+\usepackage{extsizes} % Для добавления в параметры класса документа 14pt
+
+% Для работы с несколькими языками и шрифтом Times New Roman по-умолчанию
+\usepackage[english,russian]{babel}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+% ГОСТовские настройки для полей и абзацев
+\usepackage[left=30mm,right=15mm,top=20mm,bottom=20mm]{geometry}
+\usepackage{misccorr}
+\usepackage{indentfirst}
+\usepackage{enumitem}
+\setlength{\parindent}{1.25cm}
+\linespread{1.3}
+\setlist{nolistsep} % Отсутствие отступов между элементами \enumerate и \itemize
+
+% Дополнительное окружения для подписей
+\usepackage{array}
+\newenvironment{signstabular}[1][1]{
+	\renewcommand*{\arraystretch}{#1}
+	\tabular
+}{
+	\endtabular
+}
+
+% Переопределение стандартных \section, \subsection, \subsubsection по ГОСТу;
+% Переопределение их отступов до и после для 1.5 интервала во всем документе
+\usepackage{titlesec}
+
+\titleformat{\section}[block]
+    {\bfseries\normalsize}
+    {\hspace{1.25cm}\thesection}
+    {1ex}{}   
+    
+\titleformat{name=\section,numberless}[block]
+  {\bfseries\normalsize}
+  {}
+  {0pt}
+  {\hspace*{1.25cm}}
+
+\titleformat{\subsection}[block]
+    {\bfseries\normalsize}
+    {\hspace{1.25cm}\thesubsection}
+    {1ex}{}
+
+\titleformat{\subsubsection}[block]
+    {\bfseries\normalsize}
+    {\hspace{1.25cm}\thesubsubsection}
+    {1ex}{}
+
+% Работа с изображениями и таблицами; переопределение названий по ГОСТу
+\usepackage[justification=centering]{caption}
+\captionsetup[figure]{name={Рисунок},labelsep=endash}
+\captionsetup[table]{singlelinecheck=false, labelsep=endash}
+
+\usepackage{graphicx}
+\usepackage{slashbox} % Диагональное разделение первой ячейки в таблицах
+\usepackage{multirow}
+
+% Цвета для гиперссылок и листингов
+\usepackage{color}
+
+% Гиперссылки \toc с кликабельностью
+\usepackage{hyperref}
+
+\hypersetup{
+	linktoc=all,
+	linkcolor=black,
+	colorlinks=true,
+}
+
+% Листинги
+\setsansfont{Arial}
+\setmonofont{Courier New}
+
+\usepackage{color} % Цвета для гиперссылок и листингов
+\definecolor{comment}{rgb}{0,0.5,0}
+\definecolor{plain}{rgb}{0.2,0.2,0.2}
+\definecolor{string}{rgb}{0.91,0.45,0.32}
+
+\usepackage{listings}
+\lstset{
+	basicstyle=\footnotesize\ttfamily,
+	language=[Sharp]C, % Или другой ваш язык -- см. документацию пакета
+	commentstyle=\color{comment},
+	numbers=left,
+	numberstyle=\tiny\color{plain},
+	numbersep=5pt,
+	tabsize=4,
+	extendedchars=\true,
+	breaklines=true,
+	keywordstyle=\color{blue},
+	frame=b,
+	stringstyle=\ttfamily\color{string}\ttfamily,
+	showspaces=false,
+	showtabs=false,
+	xleftmargin=17pt,
+	framexleftmargin=17pt,
+	framexrightmargin=5pt,
+	framexbottommargin=4pt,
+	showstringspaces=false,
+	inputencoding=utf8x,
+	keepspaces=true
+}
+
+\DeclareCaptionLabelSeparator{line}{\ --\ }
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.43,0.35,0.35,0.01}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{
+	format=listing,
+	labelfont=white,
+	textfont=white,
+	singlelinecheck=false,
+	margin=0pt,
+	font={bf,footnotesize},
+	labelsep=line
+}
+%%% Правильные отступы в подписях таблиц
+\newlength\myindention
+\DeclareCaptionFormat{myformat}%
+{\hspace*{\myindention}#1#2#3}
+\setlength\myindention{1.25cm}
+\captionsetup{format=myformat}
+\captionsetup[table]{justification = justified,format=myformat}
+
+% Годные пакеты для обычных действий
+\usepackage{ulem} % Нормальное нижнее подчеркивание
+\usepackage{hhline} % Двойная горизонтальная линия в таблицах
+\usepackage[figure,table]{totalcount} % Подсчет изображений, таблиц
+\usepackage{rotating} % Поворот изображения вместе с названием
+\usepackage{lastpage} % Для подсчета числа страниц
+
+% Быстрый и грязный способ избежать ошибки с титульником
+\renewcommand\maketitle{}
+
+% Директория с рисуночками
+\graphicspath{ {./pic/after} }
+
+%%% Запрет деления слов (перенос слова на новую строку)
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+%%% Делаем рисунки плавающими
+\usepackage{float}
+
+%%% Доп математика
+\usepackage{mathtools}
+
+%%% Косая черта в таблицах
+\usepackage{diagbox}
+
+% Значок градусов
+\usepackage{gensymb}
+
+% ---------------------- Документ ---------------------- 
+\begin{document}
+
+%%% Меняем "Рис._" на "Рисунок_"
+\def\figurename{Рисунок}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\input{intro.tex}
+
+\input{chap1.tex}
+
+\input{chap2.tex}
+
+\input{chap3.tex}
+
+\input{chap4.tex}
+
+\input{chap5.tex}
+
+\input{chap6.tex}
+
+\input{chap7.tex}
+
+\input{chap8.tex}
+
+\input{eco.tex}
+
+%\input{soc.tex}
+
+\input{concl.tex}
+
+\input{lit.tex}
+ 
+\end{document}  
